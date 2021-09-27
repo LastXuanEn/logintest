@@ -8,6 +8,8 @@ package com.lte.common;
  */
 public class TestGit {
     public static void main(String[] args) {
+        System.out.println("我是分支");
+        System.out.println("我是分支我要和你合并拉");
 
     }
 }

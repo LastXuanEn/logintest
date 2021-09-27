@@ -1,0 +1,24 @@
+server:
+
+  port: 5050
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/mylogin?useUnicode=true&characterEcoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.lte.pojo
+logging:
+  level:
+    com.lte.mapper: debug
+    com.lte.service: info
+    com.lte.controller: info
+pagehelper:
+  heleper-dialect: mysql
+  resonable: true
+  support-methods-arguments: true
+photo:
+  dir: E:\IdeaWorkPlace\logintest\src\main\resources\static

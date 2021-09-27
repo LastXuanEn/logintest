@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lte.mapper.PurchaseStorageMapper">
+    <select id="findPage" resultType="purchaseStorage" parameterType="string">
+        select * from purchasestorage
+        <where>
+            <if test="value != null and value.length>0">
+                productName like concat("%",#{value},"%")
+            </if>
+        </where>
+    </select>
+    <insert id="save" parameterType="purchaseStorage" >
+        insert into purchasestorage(productName,specification,price,amount,billDate,remark,pictureUrl)
+        values(#{productName},#{specification},#{price},#{amount},#{billDate},#{remark},#{pictureUrl})
+    </insert>
+
+
+</mapper>

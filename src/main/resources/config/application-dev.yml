@@ -1,6 +1,3 @@
-server:
-
-  port: 5050
 spring:
   datasource:
     username: root
@@ -22,3 +19,7 @@ pagehelper:
   support-methods-arguments: true
 photo:
   dir: E:\IdeaWorkPlace\logintest\src\main\resources\static
+
+people:
+  name: zhangsan
+  age:  18

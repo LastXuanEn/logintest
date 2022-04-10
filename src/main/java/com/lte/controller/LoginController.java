@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 public class LoginController {
     @Autowired
-    private LoginService LoginService;
+    private LoginService loginService;
 
     @PostMapping("/login")
     public Result login(@RequestBody User user,String code, HttpServletRequest request) {
@@ -27,9 +27,10 @@ public class LoginController {
         if (!getCode.equalsIgnoreCase(code)) {
             return new Result("验证码输入错误", false);
         }
-        User findUser = LoginService.login(user);
+        User findUser = loginService.login(user);
         if (findUser != null) {
             Result result = new Result(findUser, "登录成功", true);
+            request.getSession().setAttribute("user",findUser);
             return result;
         }
         Result result = new Result("账号或密码错误", false);

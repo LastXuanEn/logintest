@@ -15,10 +15,9 @@ import java.util.List;
  * 分页结果封装对象
  */
 @Data
-
-public class PageResult implements Serializable {
+public class PageResult<T> implements Serializable {
     private Long total; //返回结果总条数
-    private List rows; //返回结果集
+    private List<T> rows; //返回结果集
 
     public PageResult(Long total, List rows) {
         this.total = total;

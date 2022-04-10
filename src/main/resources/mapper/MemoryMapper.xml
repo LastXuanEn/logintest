@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lte.mapper.MemoryMapper">
+    <select id="findPage" resultMap="memoryMap" parameterType="string">
+        select * from memory
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="queryString != null and queryString.length>0">
+                tile like concat('%',#{keyWords},'%')
+            </if>
+        </trim>
+    </select>
+    <resultMap id="memoryMap" type="com.lte.pojo.Memory">
+        <id column="id" property="id"/>
+        <result column="tile" property="tile"/>
+        <result column="story" property="story"/>
+        <result column="create_time" property="createTime"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+    <insert id="addMemory"  parameterType="com.lte.pojo.Memory" useGeneratedKeys="true" keyProperty="id">
+        insert into memory(id,tile,story,create_time,pic_url,created_by)
+        values (#{id},#{tile},#{story},#{createTime},#{picUrl},#{createdBy})
+    </insert>
+</mapper>

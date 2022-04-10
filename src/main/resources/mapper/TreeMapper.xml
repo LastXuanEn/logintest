@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lte.mapper.TreeMapper">
+
+<update id="updateList" parameterType="list">
+    update pms_category
+    <trim prefix="set" suffixOverrides=",">
+        <trim prefix="show_status=case" suffix="end,">
+            <foreach collection="list" item="item">
+                when cat_id = #{item.catId} then 0
+            </foreach>
+        </trim>
+    </trim>
+    <where>
+        <foreach collection="list" separator="or" item="item">
+            cat_id = #{item.catId}
+        </foreach>
+    </where>
+</update>
+</mapper>

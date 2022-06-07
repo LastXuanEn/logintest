@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -22,7 +23,9 @@ public class LoginController {
 
     @PostMapping("/login")
     public Result login(@RequestBody User user,String code, HttpServletRequest request) {
-        String getCode = (String) request.getServletContext().getAttribute("code");
+        // String getCode = (String) request.getServletContext().getAttribute("code");
+        HttpSession session = request.getSession();
+        String getCode = (String)session.getAttribute("code");
         System.out.println("接收的code:"+code);
         if (!getCode.equalsIgnoreCase(code)) {
             return new Result("验证码输入错误", false);

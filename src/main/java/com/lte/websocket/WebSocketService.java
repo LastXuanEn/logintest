@@ -9,6 +9,8 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ServerEndpoint(value = "/websocket/{userName}")
@@ -73,12 +75,12 @@ public class WebSocketService {
      *
      * @param message 客户端发送过来的消息*/
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws IOException {
         log.info("收到用户消息:"+userName+",报文:"+message);
         //可以群发消息
         //消息保存到数据库、redis
         if(! StringUtils.isEmpty(message)){
-
+            sendMessage(message);
         }
     }
 
@@ -97,8 +99,13 @@ public class WebSocketService {
      * 连接服务器成功后主动推送
      */
     public void sendMessage(String message) throws IOException {
-        synchronized (session){
-            this.session.getBasicRemote().sendText(message);
+        if(!StringUtils.isEmpty(message)) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String date = format.format(new Date());
+            message = message + "," + userName + "," + date;
+            for (WebSocketClient webSocketClient : webSocketMap.values()) {
+                webSocketClient.getSession().getBasicRemote().sendText(message);
+            }
         }
     }
 

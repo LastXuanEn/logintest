@@ -23,13 +23,13 @@ public class BaseBean implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")  //将日期格式化成制指定字符串
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")  //将日期格式化成制指定字符串
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
      Date createTime;
     /**
      * 最后修改时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")  //将日期格式化成制指定字符串
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "GMT+8")  //将日期格式化成制指定字符串
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     Date updateTime;
     /**

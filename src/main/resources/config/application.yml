@@ -1,5 +1,5 @@
 server:
-  port: 5050
+  port: 10001
 spring:
   application:
     name: logintest

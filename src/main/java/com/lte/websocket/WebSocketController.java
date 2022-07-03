@@ -13,10 +13,12 @@ import java.io.IOException;
  * @Description: com.lte.websocket
  * @version: 1.0
  */
+
+// 目前没啥用
 @RestController
 public class WebSocketController {
 
-    @RequestMapping("/websocket")
+    // @RequestMapping("/websocket")
     public void push(String name,String msg) throws IOException {
         msg = name + "," + msg;
         WebSocketService.sendMessage("laitingen",msg);
